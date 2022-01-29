@@ -17,11 +17,13 @@ export class EventsGateway implements OnGatewayInit, OnGatewayConnection, OnGate
 
     @SubscribeMessage('events')
     handleEvent(@MessageBody() data: string): string {
+        this.logger.log('handle event');
         return data;
     }
 
     @SubscribeMessage('messages')
     handleMessage(client: Socket, data: any): void {
+        this.logger.log('handle message');
         client.emit('message', data);
     }
 
