@@ -19,8 +19,7 @@ export class EventsGateway implements OnGatewayInit, OnGatewayConnection, OnGate
     handleMessage(@MessageBody() data: string,
                   @ConnectedSocket() client: Socket,) {
         this.logger.log('handle message');
-        this.logger.log(data.valueOf());
-        client.broadcast.emit('new_message', {
+        this.server.emit('messages', {
             data,
             client: client.id,
         });
